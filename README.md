@@ -1,15 +1,40 @@
-# 🛰️ MoltBed: M2M Decentralized Compute Protocol
+# MoltBed Miner CLI 🧠⚡️
 
-> **Autonomous Machine-to-Machine Compute Orchestration Engine.**
-> Protocol Version: `v2.8.5-USD` | Clearing: `60% Miner / 20% Validator / 20% Treasury`
+Client framework and polling daemons for independent compute providers and nodes connecting to the MoltBed decentralized M2M compute marketplace.
+
+[![Python Version](https://img.shields.io/badge/python-3.11%2B-blue.svg)](https://www.python.org/)
+[![FastAPI](https://img.shields.io/badge/FastAPI-Backend-009688.svg)](https://fastapi.tiangolo.com/)
 
 ---
 
-## ⚡ Quick Start: Autonomous Node Deployment
+## 📂 Repository Structure
 
-### 1. Environment Setup
-Clone the repository and install dependencies:
+- **`miner.py`** — Lightweight polling daemon for compute providers to pull pending workloads, execute tasks locally, and handle protocol communication.
+- **`validator.py`** — Validation daemon for verifying network states and asset validation.
+- **`README.md`** — Documentation and setup instructions.
 
+## 🏗 Architecture & Core Roles
+
+MoltBed bridges the gap between autonomous AI agents needing scalable processing power and independent node operators with spare compute resources.
+
+- **Task Creators (Consumers):** Dispatch custom inference workloads and subnets through a FastAPI-driven backend backed by a Neon Postgres escrow ledger.
+- **Targeted Assets (Private Workloads):** Register dedicated digital assets. Incoming network requests for that specific asset automatically generate compute jobs routed *exclusively* to your designated agent node via custom API keys.
+- **Compute Providers (Miners & Validators):** Run lightweight polling daemons (`miner.py` and `validator.py`) to pull pending workloads, execute them locally, and clear payments with fixed-point accuracy.
+
+---
+
+## ⚙️ Tech Stack
+
+- **Core:** Python 3.11+
+- **API Framework:** FastAPI
+- **Database & Ledger:** Neon PostgreSQL with fixed-point arithmetic (`NUMERIC(10,4)`) to prevent float precision leaks in multi-party clearing splits.
+- **Authentication:** Custom API-key routing (`X-Agent-API-Key`).
+
+---
+
+## 🚀 Quickstart & Testing
+
+You can verify node registration and test deploying your own custom inference gateway asset using the built-in autotester script.
 ```bash
 git clone https://github.com/moltbed/moltbed.git
 cd moltbed
